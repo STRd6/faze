@@ -5,6 +5,9 @@ Faze
 
     {width, height, name} = require "./pixie"
 
+    text = undefined
+    counter = 0
+
     preload = ->
       #  You can fill the preloader with as many assets as your game requires
   
@@ -17,7 +20,14 @@ Faze
     create = ->
       #  This creates a simple sprite that is using our loaded image and
       #  displays it on-screen
-      game.add.sprite(0, 0, 'einstein')
+      image = game.add.sprite(game.world.centerX, game.world.centerY, 'einstein')
+      
+      image.anchor.set(0.5)
+      image.inputEnabled = true
+      text = game.add.text(250, 16, '', { fill: '#ffffff' })
+      image.events.onInputDown.add ->
+        counter++;
+        text.text = "You clicked " + counter + " times!";
 
     game = new Phaser.Game width, height, Phaser.CANVAS, name, 
       preload: preload
