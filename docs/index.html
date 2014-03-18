@@ -38,6 +38,9 @@
 
 {width, height, name} = require <span class="string">"./pixie"</span>
 
+text = <span class="literal">undefined</span>
+counter = <span class="number">0</span>
+
 <span class="function"><span class="title">preload</span></span> = -&gt;
   <span class="comment">#  You can fill the preloader with as many assets as your game requires</span>
 
@@ -50,7 +53,14 @@
 <span class="function"><span class="title">create</span></span> = -&gt;
   <span class="comment">#  This creates a simple sprite that is using our loaded image and</span>
   <span class="comment">#  displays it on-screen</span>
-  game.add.sprite(<span class="number">0</span>, <span class="number">0</span>, <span class="string">'einstein'</span>)
+  image = game.add.sprite(game.world.centerX, game.world.centerY, <span class="string">'einstein'</span>)
+
+  image.anchor.set(<span class="number">0.5</span>)
+  image.inputEnabled = <span class="literal">true</span>
+  text = game.add.text(<span class="number">250</span>, <span class="number">16</span>, <span class="string">''</span>, { fill: <span class="string">'#ffffff'</span> })
+  image.events.onInputDown.add -&gt;
+    counter++;
+    text.text = <span class="string">"You clicked "</span> + counter + <span class="string">" times!"</span>;
 
 game = <span class="keyword">new</span> Phaser.Game width, height, Phaser.CANVAS, name, 
   preload: preload
