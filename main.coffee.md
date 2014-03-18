@@ -1,8 +1,9 @@
 Faze
 ====
 
-    require "./lib/phaser"
-    {width, heiht, name} = require "./pixie"
+    require "./setup"
+
+    {width, height, name} = require "./pixie"
 
     preload = ->
       #  You can fill the preloader with as many assets as your game requires
